@@ -13,26 +13,26 @@ The pom.xml is very similar to HelloHibernateAnnotation but we need to add some 
 2. Typically, any Java-based web application (servlet=based) needs web.xml file to work. However, with SpringMVC annotation we can REMOVE web.xml and substitute it by extending AbstractAnnotationConfigDispatcherServletInitializer.
 
 
-public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-    protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class};
-    }
+        public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+            protected Class<?>[] getRootConfigClasses() {
+                return new Class[]{AppConfig.class};
+            }
 
-    protected Class<?>[] getServletConfigClasses() {
-        return null;
-    }
+            protected Class<?>[] getServletConfigClasses() {
+                return null;
+            }
 
-    protected String[] getServletMappings() {
-        return new String[]{"/"};
-    }
-}
+            protected String[] getServletMappings() {
+                return new String[]{"/"};
+            }
+        }
 
 In order to wire sessionFactory and studentService beans, we need to inject AppConfig class into the getRootConfigClasses method of AbstractAnnotationConfigServletDispatcherInitializer. 
 
 
-protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class};
-}
+        protected Class<?>[] getRootConfigClasses() {
+                return new Class[]{AppConfig.class};
+        }
     
 The AppConfig class is very similar to beans.xm where we define all the beans. Remember to add 4 annotations:
 -@Configuration: to denote that this class will contain beans
@@ -42,39 +42,39 @@ The AppConfig class is very similar to beans.xm where we define all the beans. R
 
 
 
-@Configuration
-@EnableTransactionManagement
-@EnableWebMvc
-@ComponentScan("controller")
-public class AppConfig {
+        @Configuration
+        @EnableTransactionManagement
+        @EnableWebMvc
+        @ComponentScan("controller")
+        public class AppConfig {
 
-    @Bean
-    public StudentService studentService(){
-        return new StudentService();
-    }
+            @Bean
+            public StudentService studentService(){
+                return new StudentService();
+            }
 
-    @Bean
-    public LocalSessionFactoryBean sessionFactory(){
-        LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
+            @Bean
+            public LocalSessionFactoryBean sessionFactory(){
+                LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
-        sessionFactoryBean.setPackagesToScan("model");
+                sessionFactoryBean.setPackagesToScan("model");
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("rmit");
+                DriverManagerDataSource dataSource = new DriverManagerDataSource();
+                dataSource.setDriverClassName("org.postgresql.Driver");
+                dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
+                dataSource.setUsername("postgres");
+                dataSource.setPassword("rmit");
 
-        sessionFactoryBean.setDataSource(dataSource);
+                sessionFactoryBean.setDataSource(dataSource);
 
-        return sessionFactoryBean;
-    }
+                return sessionFactoryBean;
+            }
 
-    @Bean
-    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
-        HibernateTransactionManager tx = new HibernateTransactionManager(sessionFactory);
+            @Bean
+            public HibernateTransactionManager transactionManager(SessionFactory sessionFactory){
+                HibernateTransactionManager tx = new HibernateTransactionManager(sessionFactory);
 
-        return tx;
-    }
+                return tx;
+            }
 
-}
+        }
