@@ -36,7 +36,7 @@ public class AppConfig {
         //For mysql
         //properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         properties.put("hibernate.show_sql", true);
-        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.hbm2ddl.auto", "create-drop");
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 
@@ -46,7 +46,7 @@ public class AppConfig {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("rmit");
+        dataSource.setPassword("GAtech321");
 
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setHibernateProperties(properties);
