@@ -9,9 +9,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import service.StudentService;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -20,6 +18,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({"controller", "service"})
+@EnableWebMvc
 public class AppConfig {
 //
 //    @Bean
@@ -44,7 +43,7 @@ public class AppConfig {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/hello");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/assignment2");
         dataSource.setUsername("postgres");
         dataSource.setPassword("GAtech321");
 

@@ -1,14 +1,11 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 
 import javax.persistence.*;
 
-/**
- * Created by CoT on 6/18/18.
- */
 @Entity
-public class Teacher {
+@Table(name = "drugList")
+public class DrugList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,8 +14,7 @@ public class Teacher {
     @Column
     private String name;
 
-
-    public Teacher() {
+    public DrugList() {
     }
 
     public int getId() {
@@ -36,4 +32,5 @@ public class Teacher {
     public void setName(String name) {
         this.name = name;
     }
-}
+
+    }
